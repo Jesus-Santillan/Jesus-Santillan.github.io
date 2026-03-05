@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>METODOLOGÍAS DE DESARROLLO DE SW</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"></link>
+        <style>
+            @media (min-width: 768px) {
+                .container, .container-md, .container-sm {
+                    max-width: 720px;
+                }
+            }
+            @media (min-width: 576px) {
+                .container, .container-sm {
+                    max-width: 540px;
+                }
+            }
+            @media (min-width: 992px) {
+                .container, .container-lg, .container-md, .container-sm {
+                    max-width: 960px;
+                }
+            }
+            @media (min-width: 1200px) {
+                .container, .container-lg, .container-md, .container-sm, .container-xl {
+                    max-width: 1140px;
+                    .h3, h3 {
+                        font-size: 1.75rem;
+                    }
+                }
+            }
+            .container, .container-fluid, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
+                --bs-gutter-x: 1.5rem;
+                --bs-gutter-y: 0;
+                width: 100%;
+                padding-right: calc(var(--bs-gutter-x) * .5);
+                padding-left: calc(var(--bs-gutter-x) * .5);
+                margin-right: auto;
+                margin-left: auto;
+                margin-top: 50px;
+                margin-bottom: 10px;
+                text-align: center !important;
+            }
+            
+            *, ::after, ::before {
+                box-sizing: border-box;
+            }
+            body {
+                font-family: var(--bs-body-font-family);
+                font-size: var(--bs-body-font-size);
+                font-weight: var(--bs-body-font-weight);
+                line-height: var(--bs-body-line-height);
+                color: var(--bs-body-color);
+                text-align: var(--bs-body-text-align);
+                -webkit-text-size-adjust: 100%;
+            }
+            :root {
+            --bs-breakpoint-xs: 0;
+            --bs-breakpoint-sm: 576px;
+            --bs-breakpoint-md: 768px;
+            --bs-breakpoint-lg: 992px;
+            --bs-breakpoint-xl: 1200px;
+            --bs-breakpoint-xxl: 1400px;
+            }
+            :root, [data-bs-theme="light"] {
+                --bs-blue: #0d6efd;
+                --bs-indigo: #6610f2;
+                --bs-purple: #6f42c1;
+                --bs-pink: #d63384;
+                --bs-red: #dc3545;
+                --bs-orange: #fd7e14;
+                --bs-yellow: #ffc107;
+                --bs-green: #198754;
+                --bs-teal: #20c997;
+                --bs-cyan: #0dcaf0;
+                --bs-black: #000;
+                --bs-white: #fff;
+                --bs-gray: #6c757d;
+                --bs-gray-dark: #343a40;
+                --bs-gray-100: #f8f9fa;
+                --bs-gray-200: #e9ecef;
+                --bs-gray-300: #dee2e6;
+                --bs-gray-400: #ced4da;
+                --bs-gray-500: #adb5bd;
+                --bs-gray-600: #6c757d;
+                --bs-gray-700: #495057;
+                --bs-gray-800: #343a40;
+                --bs-gray-900: #212529;
+                --bs-primary: #0d6efd;
+                --bs-secondary: #6c757d;
+                --bs-success: #198754;
+                --bs-info: #0dcaf0;
+                --bs-warning: #ffc107;
+                --bs-danger: #dc3545;
+                --bs-light: #f8f9fa;
+                --bs-dark: #212529;
+                --bs-primary-rgb: 13,110,253;
+                --bs-secondary-rgb: 108,117,125;
+                --bs-success-rgb: 25,135,84;
+                --bs-info-rgb: 13,202,240;
+                --bs-warning-rgb: 255,193,7;
+                --bs-danger-rgb: 220,53,69;
+                --bs-light-rgb: 248,249,250;
+                --bs-dark-rgb: 33,37,41;
+                --bs-primary-text-emphasis: #052c65;
+                --bs-secondary-text-emphasis: #2b2f32;
+                --bs-success-text-emphasis: #0a3622;
+                --bs-info-text-emphasis: #055160;
+                --bs-warning-text-emphasis: #664d03;
+                --bs-danger-text-emphasis: #58151c;
+                --bs-light-text-emphasis: #495057;
+                --bs-dark-text-emphasis: #495057;
+                --bs-primary-bg-subtle: #cfe2ff;
+                --bs-secondary-bg-subtle: #e2e3e5;
+                --bs-success-bg-subtle: #d1e7dd;
+                --bs-info-bg-subtle: #cff4fc;
+                --bs-warning-bg-subtle: #fff3cd;
+                --bs-danger-bg-subtle: #f8d7da;
+                --bs-light-bg-subtle: #fcfcfd;
+                --bs-dark-bg-subtle: #ced4da;
+                --bs-primary-border-subtle: #9ec5fe;
+                --bs-secondary-border-subtle: #c4c8cb;
+                --bs-success-border-subtle: #a3cfbb;
+                --bs-info-border-subtle: #9eeaf9;
+                --bs-warning-border-subtle: #ffe69c;
+                --bs-danger-border-subtle: #f1aeb5;
+                --bs-light-border-subtle: #e9ecef;
+                --bs-dark-border-subtle: #adb5bd;
+                --bs-white-rgb: 255,255,255;
+                --bs-black-rgb: 0,0,0;
+                --bs-font-sans-serif: system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue","Noto Sans","Liberation Sans",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+                --bs-font-monospace: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+                --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
+                --bs-body-font-family: var(--bs-font-sans-serif);
+                --bs-body-font-size: 1rem;
+                --bs-body-font-weight: 400;
+                --bs-body-line-height: 1.5;
+                --bs-body-color: #212529;
+                --bs-body-color-rgb: 33,37,41;
+                --bs-body-bg: #fff;
+                --bs-body-bg-rgb: 255,255,255;
+                --bs-emphasis-color: #000;
+                --bs-emphasis-color-rgb: 0,0,0;
+                --bs-secondary-color: rgba(33, 37, 41, 0.75);
+                --bs-secondary-color-rgb: 33,37,41;
+                --bs-secondary-bg: #e9ecef;
+                --bs-secondary-bg-rgb: 233,236,239;
+                --bs-tertiary-color: rgba(33, 37, 41, 0.5);
+                --bs-tertiary-color-rgb: 33,37,41;
+                --bs-tertiary-bg: #f8f9fa;
+                --bs-tertiary-bg-rgb: 248,249,250;
+                --bs-heading-color: inherit;
+                --bs-link-color: #0d6efd;
+                --bs-link-color-rgb: 13,110,253;
+                --bs-link-decoration: underline;
+                --bs-link-hover-color: #0a58ca;
+                --bs-link-hover-color-rgb: 10,88,202;
+                --bs-code-color: #d63384;
+                --bs-highlight-bg: #fff3cd;
+                --bs-border-width: 1px;
+                --bs-border-style: solid;
+                --bs-border-color: #dee2e6;
+                --bs-border-color-translucent: rgba(0, 0, 0, 0.175);
+                --bs-border-radius: 0.375rem;
+                --bs-border-radius-sm: 0.25rem;
+                --bs-border-radius-lg: 0.5rem;
+                --bs-border-radius-xl: 1rem;
+                --bs-border-radius-xxl: 2rem;
+                --bs-border-radius-2xl: var(--bs-border-radius-xxl);
+                --bs-border-radius-pill: 50rem;
+                --bs-box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+                --bs-box-shadow-sm: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+                --bs-box-shadow-lg: 0 1rem 3rem rgba(0, 0, 0, 0.175);
+                --bs-box-shadow-inset: inset 0 1px 2px rgba(0, 0, 0, 0.075);
+                --bs-focus-ring-width: 0.25rem;
+                --bs-focus-ring-opacity: 0.25;
+                --bs-focus-ring-color: rgba(13, 110, 253, 0.25);
+                --bs-form-valid-color: #198754;
+                --bs-form-valid-border-color: #198754;
+                --bs-form-invalid-color: #dc3545;
+                --bs-form-invalid-border-color: #dc3545;
+                }
+            .btn-custom {
+                margin-bottom: 10px;
+            }
+            .mb-4 {
+            margin-bottom: 1.5rem !important;
+            }
+            .h3, h3 {
+            font-size: calc(1.3rem + .6vw);
+            }
+            .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+                margin-top: 0;
+                margin-bottom: .5rem;
+                font-weight: 500;
+                line-height: 1.2;
+                color: var(--bs-heading-color);
+            }
+            .text-center {
+                text-align: center !important;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container"></di>
+            <h2 class="mb-4">METODOLOGÍAS DE DESARROLLO DE SW</h2>
+            <h3 class="mb-4">¿Qué es una metodología de desarrollo de software?</h3>
+            <span>
+                Las metodologías de desarrollo de software son un conjunto de técnicas y métodos organizativos que se aplican para diseñar soluciones de software informático. El objetivo de las distintas metodologías es el de intentar organizar los equipos de trabajo para que estos desarrollen las funciones de un programa de la mejor manera posible.
+            </span>
+            <br><br>
+            <h2 class="mb-4">TIPOS DE METODOLOGÍAS</h2>
+            <div class="container text-center py-4">
+                <hr class="my-5">
+                <div class="row g-3 justify-content-center">
+                    <div class="col-6 col-md-4 col-lg-3">
+                        <button class="btn btn-primary w-100" type="button" data-bs-toggle="modal" data-bs-target="#modalCascada">CASCADA</button>
+                    </div>
+                    <div class="col-6 col-md-4 col-lg-3">
+                        <button class="btn btn-secondary w-100" type="button" data-bs-toggle="modal" data-bs-target="#modalV">MODELO V</button>
+                    </div>
+                    <div class="col-6 col-md-4 col-lg-3">
+                        <button class="btn btn-success w-100" type="button" data-bs-toggle="modal" data-bs-target="#modalAgiles">ÁGILES</button>
+                    </div>
+                    <div class="col-6 col-md-4 col-lg-3">
+                        <button class="btn btn-danger w-100" type="button" data-bs-toggle="modal" data-bs-target="#modalScrum">SCRUM</button>    
+                    </div>
+                    <div class="col-6 col-md-4 col-lg-3">
+                        <button class="btn btn-warning w-100" type="button" data-bs-toggle="modal" data-bs-target="#modalKanban">KANBAN</button>
+                    </div>
+                    <div class="col-6 col-md-4 col-lg-3">
+                        <button class="btn btn-info w-100 text-white" type="button" data-bs-toggle="modal" data-bs-target="#modalXP">XP</button>
+                    </div>
+                    <div class="col-6 col-md-4 col-lg-3">
+                        <button class="btn btn-dark w-100" type="button" data-bs-toggle="modal" data-bs-target="#modalHibridas">HÍBRIDAS</button>
+                    </div>
+                </div>
+            </div>
+            <div id="modalCascada" class="modal fade" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Vista de Cascada</h5>
+                            <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close" ></button>
+                        </div>
+                        <div class="modal-body text-center">
+                            <img class="img-fluid rounded" src="img/1_cascada.png" alt="Cascada">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="modalV" class="modal fade" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Vista Modelo V</h5>
+                            <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close" ></button>
+                        </div>
+                        <div class="modal-body text-center">
+                            <img class="img-fluid rounded" src="img/2_modelo_v.png" alt="Modelo V">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="modalAgiles" class="modal fade" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Vista Metodologías Ágiles</h5>
+                            <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close" ></button>
+                        </div>
+                        <div class="modal-body text-center">
+                            <img class="img-fluid rounded" src="img/3_agiles.png" alt="Ágiles">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="modalScrum" class="modal fade" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Vista Scrum</h5>
+                            <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close" ></button>
+                        </div>
+                        <div class="modal-body text-center">
+                            <img class="img-fluid rounded" src="img/4_scrum.png" alt="Scrum">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="modalKanban" class="modal fade" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Vista Kanban</h5>
+                            <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close" ></button>
+                        </div>
+                        <div class="modal-body text-center">
+                            <img class="img-fluid rounded" src="img/5_kanvan.png" alt="Kanban">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="modalXP" class="modal fade" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Vista XP (Extreme Programming)</h5>
+                            <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close" ></button>
+                        </div>
+                        <div class="modal-body text-center">
+                            <img class="img-fluid rounded" src="img/6_xp.png" alt="XP">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="modalHibridas" class="modal fade" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Vista Híbridas-Modernas</h5>
+                            <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close" ></button>
+                        </div>
+                        <div class="modal-body text-center">
+                            <img class="img-fluid rounded" src="img/7_hibridas_modernas.png" alt="Híbridas">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-5">
+            <h3 >LINK A TABLERO DE TRABAJO</h3>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-center mt-3">
+                <a class="btn btn-outline-primary" href="https://utd-team-oqq4zx3z.atlassian.net/jira/software/projects/KAN/boards/1?atlOrigin=eyJpIjoiMThiNWJlOGEwOTQwNGY3MGI4NGFlY2E1NDhjNTA1YzUiLCJwIjoiaiJ9" role="button">---- JIRA ----</a>
+            </div>
+            <br>
+            <hr class="my-5">
+            <div class="d-grid gap-2 d-md-flex justify-content-md-center mt-3">
+                <a class="btn btn-outline-primary" href="https://jesus-santillan.github.io/" role="button">---- REGRESAR MENÚ PRINCIPAL ----</a>
+            </div>
+            <br>
+            <h3>Escribre la frase que colocaste en el tablero de metodología ágil:</h3>
+            <br>
+            <h3>¿Porque persiste? -Porque lo decidí</h3>
+            <br>
+            <h2>Alumno: Santillan Fuentes Jesus Emilio</h2>
+            <hr class="my-5">
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    </body>
+</html>
